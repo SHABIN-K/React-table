@@ -126,9 +126,9 @@ const App: React.FC = () => {
   return (
     <div className="app">
       {tableData.length > 0 ? (
-        <>
+        <div className="table">
           <MaterialReactTable table={table} />
-        </>
+        </div>
       ) : (
         <FileInput handleFileUpload={handleFileUpload} />
       )}
