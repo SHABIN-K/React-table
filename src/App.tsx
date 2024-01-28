@@ -29,7 +29,14 @@ const App: React.FC = () => {
       complete: (result) => {
         if (result && result.data) {
           const parsedData: any[] = result.data;
-          setTableData(parsedData.slice(1)); // Skip header row
+          const cleanedData = parsedData.map((row) => {
+            const cleanedRow: Record<string, any> = {};
+            Object.keys(row).forEach((key) => {
+              cleanedRow[key.replace(/\./g, " ").trim()] = row[key];
+            });
+            return cleanedRow;
+          });
+          setTableData(cleanedData.slice(1)); // Skip header row
         }
       },
       header: true,
@@ -106,14 +113,14 @@ const App: React.FC = () => {
       ...autoTableConfig,
     });
 
-    let file = prompt("Please enter File name");
+    const file = prompt("Please enter File name");
     if (file) {
-      doc.save(`${file}-shabink.pdf`);
+      doc.save(`${file}-blah.pdf`);
     } else {
       return;
     }
   };
-  
+
   const email = "heyshabink@gmail.com";
 
   return (
