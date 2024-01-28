@@ -25,6 +25,15 @@ const App: React.FC = () => {
   const [tableData, setTableData] = useState<Data[]>([]);
 
   const handleFileUpload = (data: File) => {
+    const allowedExtensions = ["csv"];
+
+    const fileExtension = data.name.split(".").pop()?.toLowerCase();
+
+    if (!allowedExtensions.includes(fileExtension as string)) {
+      alert("Please upload a CSV file.");
+      return;
+    }
+
     Papa.parse(data, {
       complete: (result) => {
         if (result && result.data) {
