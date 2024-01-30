@@ -45,7 +45,7 @@ const App: React.FC = () => {
             });
             return cleanedRow;
           });
-          setTableData(cleanedData.slice(1)); // Skip header row
+          setTableData(cleanedData); // Skip header row
         }
       },
       header: true,
